@@ -31,7 +31,21 @@ function App() {
   return (
     <div className="container mt-4">
       <h1 className="text-center mb-4">📒 Gestor de Contactos</h1>
+
+      {/* Formulario */}
       <ContactForm onSave={addContact} />
+
+      {/* Barra de búsqueda (solo visual por ahora no tiene funccionalidad) */}
+      <div className="mb-4">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="🔍 Buscar contacto..."
+          disabled // solo visual, no hace nada aún
+        />
+      </div>
+
+      {/* Lista */}
       <ContactList contacts={contacts} onDelete={deleteContact} />
     </div>
   );
