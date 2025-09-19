@@ -45,6 +45,11 @@ function App() {
         />
       </div>
 
+      {/* Contador de contactos */}
+<p className="text-muted">
+  👥 Contactos guardados: {contacts.length}
+</p>
+
       {/* Lista */}
       <ContactList contacts={contacts} onDelete={deleteContact} />
     </div>
