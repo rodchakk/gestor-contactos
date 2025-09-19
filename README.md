@@ -13,10 +13,13 @@ Equipo #3
 3. Pegar este enlace del repo:  
 4. Elegir una carpeta en su compu y clonar.  
 5. Una vez clonado, abrir la carpeta en **Visual Studio Code**.  
-6. En la terminal de VS Code correr:  
-```bash
+6. En la terminal de VS Code correr:
+   ```bash
 npm install
 npm run dev
+
+
+
 
 
 
