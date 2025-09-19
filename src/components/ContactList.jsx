@@ -4,7 +4,7 @@ function ContactList({ contacts, onDelete }) {
   return (
     <ul className="list-group">
       {contacts.length === 0 ? (
-        <li className="list-group-item text-muted">No hay contactos aún</li>
+        <li className="list-group-item text-muted">No hay registros</li>
       ) : (
         contacts.map((c) => (
           <li
@@ -12,13 +12,15 @@ function ContactList({ contacts, onDelete }) {
             className="list-group-item d-flex justify-content-between align-items-center"
           >
             <div>
+              <i className="bi bi-person-circle me-2"></i>
               <strong>{c.name}</strong>
               <br />
-              📞 {c.phone}
+              <i className="bi bi-telephone-fill me-2 text-primary"></i>
+              {c.phone}
               <br />
-              ✉️ {c.email}
+              <i className="bi bi-envelope-fill me-2 text-success"></i>
+              {c.email}
             </div>
-
             <button
               className="btn btn-danger btn-sm"
               onClick={() => onDelete(c.id)}
