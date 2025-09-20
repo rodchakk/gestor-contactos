@@ -3,36 +3,38 @@ import ContactForm from "./components/ContactForm";
 import ContactList from "./components/ContactList";
 import useAddContact from "./hooks/useAddContact";
 
-
 function App() {
-  const [contacts, setContacts] = useState([]);
-
-  // Cargar desde LocalStorage al iniciar
-  useEffect(() => {
-    const saved = localStorage.getItem("contacts");
-    if (saved) {
-      setContacts(JSON.parse(saved));
+  // 1) Inicializar desde localStorage UNA sola vez
+  const [contacts, setContacts] = useState(() => {
+    try {
+      const raw = localStorage.getItem("contacts");
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
     }
-  }, []);
+  });
 
-  // Guardar en LocalStorage cada vez que cambie la lista
+  // 2) Guardar cuando cambie la lista
   useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify(contacts));
+    try {
+      localStorage.setItem("contacts", JSON.stringify(contacts));
+    } catch (e) {
+      console.error("No se pudo guardar en localStorage:", e);
+    }
   }, [contacts]);
 
-  // usamos el hook personalizado
+  // 3) Usamos el hook personalizado
   const addContact = useAddContact(contacts, setContacts);
 
-  // Función que elimina un contacto por id
+  // 4) Eliminar por id
   const deleteContact = (id) => {
-    setContacts((prev) => prev.filter((contact) => contact.id !== id));
+    setContacts((prev) => prev.filter((c) => c.id !== id));
   };
 
   return (
     <div className="container mt-4">
       <h1 className="text-center mb-4">📒 Gestor de Contactos</h1>
 
-      {/* Formulario */}
       <ContactForm onSave={addContact} />
 
       {/* Barra de búsqueda (solo visual por ahora) */}
@@ -48,7 +50,6 @@ function App() {
       {/* Contador de contactos */}
       <p className="text-muted">👥 Contactos guardados: {contacts.length}</p>
 
-      {/* Lista */}
       <ContactList contacts={contacts} onDelete={deleteContact} />
     </div>
   );

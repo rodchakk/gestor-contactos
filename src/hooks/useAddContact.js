@@ -1,12 +1,18 @@
-// hooks/useAddContact.js
+import { useCallback } from "react";
 
-function useAddContact(contacts, setContacts) {
-  // función simple para agregar un contacto
-  const addContact = (form) => {
-    setContacts([...contacts, { id: Date.now(), ...form }]);
-  };
+function useAddContact(setContacts) {
+  // useCallback para estabilidad de referencia (opcional pero bueno)
+  const addContact = useCallback(
+    (form) => {
+      setContacts((prev) => [
+        ...prev,
+        { id: crypto?.randomUUID?.() ?? Date.now(), ...form },
+      ]);
+    },
+    [setContacts]
+  );
 
-  return addContact; // devolvemos la función
+  return addContact;
 }
 
-export default useAddContact;  
+export default useAddContact;
