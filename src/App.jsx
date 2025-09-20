@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import ContactForm from "./components/ContactForm";
 import ContactList from "./components/ContactList";
+import useAddContact from "./hooks/useAddContact";
 
 function App() {
-  // Inicializar desde localStorage una sola vez (al montar)
+  // 1) Inicializar desde localStorage UNA sola vez
   const [contacts, setContacts] = useState(() => {
     try {
       const raw = localStorage.getItem("contacts");
       return raw ? JSON.parse(raw) : [];
     } catch {
-      // Si el JSON está corrupto, evita crashear
       return [];
     }
   });
 
-  // Guardar cada vez que cambie la lista
+  // 2) Guardar cuando cambie la lista
   useEffect(() => {
     try {
       localStorage.setItem("contacts", JSON.stringify(contacts));
@@ -23,12 +23,10 @@ function App() {
     }
   }, [contacts]);
 
-  // Agregar contacto
-  const addContact = (form) => {
-    setContacts((prev) => [...prev, { id: Date.now(), ...form }]);
-  };
+  // 3) Hook personalizado: NO le pases 'contacts' para evitar cierres obsoletos
+  const addContact = useAddContact(setContacts);
 
-  // Eliminar contacto
+  // 4) Eliminar por id
   const deleteContact = (id) => {
     setContacts((prev) => prev.filter((c) => c.id !== id));
   };
