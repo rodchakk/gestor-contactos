@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ContactForm from "./components/ContactForm";
 import ContactList from "./components/ContactList";
+import useAddContact from "./hooks/useAddContact";
+
 
 function App() {
   const [contacts, setContacts] = useState([]);
@@ -18,10 +20,8 @@ function App() {
     localStorage.setItem("contacts", JSON.stringify(contacts));
   }, [contacts]);
 
-  // Función que recibe datos del formulario y añade el contacto
-  const addContact = (form) => {
-    setContacts([...contacts, { id: Date.now(), ...form }]);
-  };
+  // usamos el hook personalizado
+  const addContact = useAddContact(contacts, setContacts);
 
   // Función que elimina un contacto por id
   const deleteContact = (id) => {
@@ -35,20 +35,18 @@ function App() {
       {/* Formulario */}
       <ContactForm onSave={addContact} />
 
-      {/* Barra de búsqueda (solo visual por ahora no tiene funccionalidad) */}
+      {/* Barra de búsqueda (solo visual por ahora) */}
       <div className="mb-4">
         <input
           type="text"
           className="form-control"
           placeholder="🔍 Buscar contacto..."
-          disabled // solo visual, no hace nada aún
+          disabled
         />
       </div>
 
       {/* Contador de contactos */}
-<p className="text-muted">
-  👥 Contactos guardados: {contacts.length}
-</p>
+      <p className="text-muted">👥 Contactos guardados: {contacts.length}</p>
 
       {/* Lista */}
       <ContactList contacts={contacts} onDelete={deleteContact} />
