@@ -23,8 +23,8 @@ function App() {
     }
   }, [contacts]);
 
-  // 3) Usamos el hook personalizado
-  const addContact = useAddContact(contacts, setContacts);
+  // 3) Hook personalizado: NO le pases 'contacts' para evitar cierres obsoletos
+  const addContact = useAddContact(setContacts);
 
   // 4) Eliminar por id
   const deleteContact = (id) => {
@@ -37,7 +37,6 @@ function App() {
 
       <ContactForm onSave={addContact} />
 
-      {/* Barra de búsqueda (solo visual por ahora) */}
       <div className="mb-4">
         <input
           type="text"
@@ -47,7 +46,6 @@ function App() {
         />
       </div>
 
-      {/* Contador de contactos */}
       <p className="text-muted">👥 Contactos guardados: {contacts.length}</p>
 
       <ContactList contacts={contacts} onDelete={deleteContact} />
