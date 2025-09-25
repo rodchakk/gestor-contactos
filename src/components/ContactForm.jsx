@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 
 function ContactForm({ onSave, onUpdate, editingContact, setEditingContact }) {
   const [form, setForm] = useState({ name: "", phone: "", email: "" });
@@ -16,12 +17,37 @@ function ContactForm({ onSave, onUpdate, editingContact, setEditingContact }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.name || !form.phone || !form.email) return;
+
+    // Validación con SweetAlert
+    if (!form.name || !form.phone || !form.email) {
+      Swal.fire({
+        icon: "warning",
+        title: "Campos vacíos",
+        text: "Por favor completa todos los campos antes de continuar.",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Entendido",
+      });
+      return;
+    }
 
     if (editingContact) {
       onUpdate(form); // actualizar
+      Swal.fire({
+        icon: "success",
+        title: "¡Actualizado!",
+        text: "El contacto se ha actualizado correctamente.",
+        timer: 2000,
+        showConfirmButton: false,
+      });
     } else {
       onSave(form); // agregar nuevo
+      Swal.fire({
+        icon: "success",
+        title: "¡Agregado!",
+        text: "El contacto se ha guardado exitosamente.",
+        timer: 2000,
+        showConfirmButton: false,
+      });
     }
 
     setForm({ name: "", phone: "", email: "" });
@@ -87,4 +113,3 @@ function ContactForm({ onSave, onUpdate, editingContact, setEditingContact }) {
 }
 
 export default ContactForm;
-

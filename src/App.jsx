@@ -24,19 +24,13 @@ function App() {
     }
   }, [contacts]);
 
-// <<<<<<< Feature/update-contact-validaciones
+//  hook no funciona
 //   const addContact = useAddContact(setContacts);
-// =======
-// <<<<<<< Updated upstream
-  // 3) Hook personalizado: NO le pases 'contacts' para evitar cierres obsoletos
-//   const addContact = useAddContact(setContacts);
-// =======
-  // 3) Usamos el hook personalizado
+// 
+
+  // 3) Usamos el hook personalizado (hook si funciona)
 
  const addContact = useAddContact(setContacts);
-
-// >>>>>>> Stashed changes
-// >>>>>>> master
 
   const deleteContact = (id) => {
     Swal.fire({
