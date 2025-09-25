@@ -23,15 +23,15 @@ function App() {
     }
   }, [contacts]);
 
-<<<<<<< Updated upstream
+// <<<<<<< Updated upstream
   // 3) Hook personalizado: NO le pases 'contacts' para evitar cierres obsoletos
-  const addContact = useAddContact(setContacts);
-=======
+  // const addContact = useAddContact(setContacts);
+// =======
   // 3) Usamos el hook personalizado
 
-+ const addContact = useAddContact(setContacts);
+ const addContact = useAddContact(setContacts);
 
->>>>>>> Stashed changes
+// >>>>>>> Stashed changes
 
   // 4) Eliminar por id
   const deleteContact = (id) => {
