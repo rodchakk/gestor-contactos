@@ -1,43 +1,48 @@
-# 📒 Gestor de Contactos
 
-Proyecto de clase **Programación Web I**  
-Equipo #3
+# 📇 Gestor de Contactos  
+**Proyecto académico — Programación Web I**
+
+Aplicación web desarrollada con **React + Vite** para gestionar contactos personales.  
+Interfaz amigable, accesible y visualmente neutra, ideal para entregas académicas.
 
 ---
 
-## 🚀 Cómo usar el proyecto
+### 🎯 Objetivo
 
-### 👉 Opción 1: Usando GitHub Desktop
-1. Abrir **GitHub Desktop**.  
-2. Dar clic en **File > Clone Repository**.  
-3. Pegar este enlace del repo:  
-4. Elegir una carpeta en su compu y clonar.  
-5. Una vez clonado, abrir la carpeta en **Visual Studio Code**.  
-6. En la terminal de VS Code correr:
-   ```bash
-npm install
-npm run dev
+Crear una experiencia sencilla para agregar, buscar, editar y eliminar contactos,  
+con un diseño limpio, responsivo y profesional.
 
+---
 
+### 🧠 Funcionalidades
 
+- 📋 Lista de contactos
+- 🔍 Búsqueda por nombre
+- ➕ Agregar contacto
+- 🖊️ Editar contacto
+- ❌ Eliminar contacto
 
+---
 
+### 🎨 Diseño visual
 
-### 👉 Opción 1: Usando terminal
+- 🎨 Colores neutros: gris claro, azul suave, blanco
+- 🧼 Layout centrado y organizado
+- 🪄 Botones con animaciones suaves
+- 📱 Diseño responsivo para móviles
 
-git clone https://github.com/rodchakk/gestor-contactos.git
-cd gestor-contactos
+---
 
-npm install
+### 🛠️ Tecnologías
 
-npm run dev
+| Tecnología     | Uso principal                          |
+|----------------|----------------------------------------|
+| React          | Componentes dinámicos                  |
+| Vite           | Empaquetado moderno                    |
+| Tailwind CSS   | Estilos visuales y responsividad       |
+| localStorage   | Persistencia de datos                  |
+| GitHub         | Control de versiones                   |
 
+---
 
-
-Lo que ya hace
-Agregar contactos con nombre, celular y email.
-Guardar contactos en el navegador con LocalStorage.
-Código separado en componentes:
-ContactForm.jsx → el formulario.
-ContactList.jsx → la lista.
-App.jsx → la lógica principal.
+### 📁 Estructura
