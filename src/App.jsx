@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import ContactForm from "./components/ContactForm";
 import ContactList from "./components/ContactList";
+import SearchBar from "./components/SearchBar";   // 👈 importar
 import useAddContact from "./hooks/useAddContact";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
   });
 
   const [editingContact, setEditingContact] = useState(null);
+  const [filtro, setFiltro] = useState("");   // 👈 estado para búsqueda
 
   useEffect(() => {
     try {
@@ -24,13 +26,7 @@ function App() {
     }
   }, [contacts]);
 
-//  hook no funciona
-//   const addContact = useAddContact(setContacts);
-// 
-
-  // 3) Usamos el hook personalizado (hook si funciona)
-
- const addContact = useAddContact(setContacts);
+  const addContact = useAddContact(setContacts);
 
   const deleteContact = (id) => {
     Swal.fire({
@@ -56,6 +52,13 @@ function App() {
     setEditingContact(null);
   };
 
+  // 👇 Filtramos los contactos según el texto de búsqueda
+  const filteredContacts = contacts.filter(
+    (c) =>
+      c.nombre?.toLowerCase().includes(filtro.toLowerCase()) ||
+      c.email?.toLowerCase().includes(filtro.toLowerCase())
+  );
+
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
       <div
@@ -75,8 +78,12 @@ function App() {
           👥 Contactos guardados: {contacts.length}
         </p>
 
+        {/* 🔍 Barra de búsqueda */}
+        <SearchBar value={filtro} onChange={setFiltro} />
+
+        {/* Lista de contactos filtrada */}
         <ContactList
-          contacts={contacts}
+          contacts={filteredContacts}
           onDelete={deleteContact}
           onEdit={setEditingContact}
         />
